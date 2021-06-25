@@ -3,6 +3,7 @@ AllCops:
 # デフォルト設定にある"vendor/**/*"が無効化されないように記述
  Exclude:
    - "vendor/**/*" # rubocop config/default.yml
+   - "db/**/*"
    - "config/**/*"
    - "bin/*"
    - "node_modules/**/*"
