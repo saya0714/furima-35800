@@ -12,15 +12,20 @@ class Item < ApplicationRecord
 
 
   with_options presence: true do
+    validates :image
     validates :title
     validates :text
-    validates :category
-    validates :status
-    validates :delivery_charge
-    validates :delivery_area
-    validates :delivery_day
-    with_options format: { with: /\A[0-9]+\z/ } do
+  
+    with_options format: { with: /\A[0-9]+\z/, } do
     validates :price, numericality: { greater_than: 300, less_than: 9999999 }
-      end
     end
-end
+    end
+    with_options numericality: { other_than: 1 } do
+    validates :category_id
+    validates :status_id
+    validates :delivery_charge_id
+    validates :delivery_area_id
+    validates :delivery_day_id
+   end
+   end
+
