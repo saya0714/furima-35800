@@ -1,6 +1,6 @@
 class ItemsController < ApplicationController
   before_action :authenticate_user!, only: [:new, :create, :edit]
-  before_action :set_tweet, only: [:edit, :show]
+  before_action :set_item, only: [:edit, :show, :update]
 
 
   def index
@@ -20,12 +20,11 @@ class ItemsController < ApplicationController
 end
 
   def show
-    @item = Item.find(params[:id])
     end
 
   def update
-    if item = Item.find(params[:id])
-    item.update(item_params)
+    @item = Item.find(params[:id])
+  if @item.update(item_params)
     redirect_to item_path
   else
     render :edit
@@ -49,6 +48,6 @@ def item_params
   end
 end
 
-def set_tweet
+def set_item
   @item = Item.find(params[:id])
 end
