@@ -23,13 +23,12 @@ end
     end
 
   def update
-    @item = Item.find(params[:id])
-  if @item.update(item_params)
-    redirect_to item_path
-  else
-    render :edit
+    if @item.update(item_params)
+      redirect_to item_path
+    else
+      render :edit
+    end
   end
-end
 
   def edit
     if current_user.id != @item.user_id
@@ -37,7 +36,7 @@ end
     else
       render :edit
     end
-    end
+  end
 
 
 
