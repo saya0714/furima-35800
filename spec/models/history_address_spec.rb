@@ -62,6 +62,11 @@ RSpec.describe HistoryAddress, type: :model do
         @history_address.valid?
         expect(@history_address.errors.full_messages).to include("Item can't be blank")
        end
+       it "電話番号が英数混合だと登録できない" do
+        @history_address.phone_number = "00a000a000a"
+        @history_address.valid?
+        expect(@history_address.errors.full_messages).to include("Phone number is invalid")
+       end
 end
 end
 end
