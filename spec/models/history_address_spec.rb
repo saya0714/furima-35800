@@ -12,6 +12,9 @@ RSpec.describe HistoryAddress, type: :model do
     it '全てが実行するとき' do
     expect(@history_address).to be_valid
     end
+    it '建物名は空でも登録できる' do
+      expect(@history_address).to be_valid
+      end
     end
     context'購入情報保存できない時' do  
       it "郵便番号が空だと登録できない" do

@@ -1,7 +1,7 @@
 class HistoriesController < ApplicationController
   before_action :authenticate_user!
   before_action :setting_item, only: [:index, :create]
-  before_action :sold_out_item, only: [:index]
+  before_action :sold_out_item, only: [:index, :create]
 
   def index
     @history_address = HistoryAddress.new
