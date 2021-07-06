@@ -53,7 +53,7 @@ end
     end
 
   def root_index
-    if current_user.id != @item.user_id
+    if current_user.id != @item.user_id || @item.history != nil
     redirect_to root_path 
     end
   end
