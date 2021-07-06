@@ -49,6 +49,16 @@ RSpec.describe HistoryAddress, type: :model do
         @history_address.valid?
         expect(@history_address.errors.full_messages).to include("Token can't be blank")
        end
+       it "user_id空だと登録できない" do
+        @history_address.user_id = nil
+        @history_address.valid?
+        expect(@history_address.errors.full_messages).to include("User can't be blank")
+       end
+       it "item_id空だと登録できない" do
+        @history_address.item_id = nil
+        @history_address.valid?
+        expect(@history_address.errors.full_messages).to include("Item can't be blank")
+       end
 end
 end
 end
