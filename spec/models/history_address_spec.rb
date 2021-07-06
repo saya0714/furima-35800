@@ -13,6 +13,7 @@ RSpec.describe HistoryAddress, type: :model do
     expect(@history_address).to be_valid
     end
     it '建物名は空でも登録できる' do
+      @history_address.building_name = ''
       expect(@history_address).to be_valid
       end
     end
