@@ -3,7 +3,7 @@ class HistoryAddress
   attr_accessor :postal_code, :delivery_area_id, :city_name, :address, :building_name, :phone_number, :user_id, :item_id, :token
 
   with_options presence: true do
-    validates :delivery_area_id, numericality: { other_than: 1 } 
+    validates :delivery_area_id, numericality: { other_than: 1, message: ' -- 以外を入力してください' }
     validates :city_name
     validates :postal_code, format: { with: /\A\d{3}[-]\d{4}\Z/ }
     validates :address

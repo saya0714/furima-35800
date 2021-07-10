@@ -28,12 +28,12 @@ RSpec.describe HistoryAddress, type: :model do
         @history_address.valid?
         expect(@history_address.errors.full_messages).to include("郵便番号は不正な値です")
       end
-      it "市区町村が空だと登録できない" do
+      it "都道府県が空だと登録できない" do
         @history_address.delivery_area_id = nil
         @history_address.valid?
         expect(@history_address.errors.full_messages).to include("都道府県を入力してください")
       end
-      it "番地が空だと登録できない" do
+      it "市区町村が空だと登録できない" do
         @history_address.city_name = ''
         @history_address.valid?
         expect(@history_address.errors.full_messages).to include("市区町村を入力してください")
@@ -68,6 +68,11 @@ RSpec.describe HistoryAddress, type: :model do
         @history_address.valid?
         expect(@history_address.errors.full_messages).to include("電話番号は不正な値です")
        end
+       it "番地が空だと登録できない" do
+        @history_address.address = ''
+        @history_address.valid?
+        expect(@history_address.errors.full_messages).to include("番地を入力してください")
+      end
 end
 end
 end

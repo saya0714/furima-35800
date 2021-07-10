@@ -20,7 +20,7 @@ class Item < ApplicationRecord
     validates :price, numericality: { greater_than: 299, less_than: 10000000 }
     end
     end
-    with_options numericality: { other_than: 1 } do
+    with_options numericality: { other_than: 1, message: ' -- 以外を入力してください' } do
     validates :category_id
     validates :status_id
     validates :delivery_charge_id
