@@ -21,6 +21,7 @@ ja:
         delivery_day_id: 発送までの日数
         price: 価格
         user: ユーザー
+        
   
   activemodel:
     attributes:
