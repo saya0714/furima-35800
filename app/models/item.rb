@@ -4,16 +4,16 @@ class Item < ApplicationRecord
   belongs_to :user
   has_many :comments
   has_one :history
-  has_one_attached :image
   belongs_to :category
   belongs_to :status
   belongs_to :delivery_charge
   belongs_to :delivery_area
   belongs_to :delivery_day
+  has_many_attached :images
 
 
   with_options presence: true do
-    validates :image
+    validates :images
     validates :title
     validates :text
   
