@@ -9,6 +9,7 @@ require("channels")
 require("../tax")
 require("../token")
 require("../card")
+require("../preview")
 
 
 
