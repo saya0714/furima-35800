@@ -1,7 +1,8 @@
 class ItemsController < ApplicationController
   before_action :authenticate_user!, only: [:new, :create, :edit, :update]
-  before_action :set_item, only: [:edit, :show, :update, :destroy]
+  before_action :set_item, only: [:edit, :show, :update, :destroy, :history]
   before_action :root_index, only: [:edit, :update, :destroy]
+
 
 
   def index
@@ -21,7 +22,9 @@ class ItemsController < ApplicationController
 end
 
   def show
-    end
+    @comment = Comment.new
+    @comments = @item.comments.includes(:user).order(created_at: "DESC")
+  end
 
   def update
     if @item.update(item_params)
@@ -40,6 +43,20 @@ end
     @item.destroy
     redirect_to root_path
   end
+end
+
+def order
+  redirect_to new_card_path and return unless current_user.card.present?
+
+  Payjp.api_key = ENV["PAYJP_SECRET_KEY"] # 環境変数を読み込む
+  customer_token = current_user.card.customer_token # ログインしているユーザーの顧客トークンを定義
+  Payjp::Charge.create(
+    amount: @item.price, # 商品の値段
+    customer: customer_token, # 顧客のトークン
+    currency: 'jpy' # 通貨の種類（日本円）
+  )
+  ItemOrder.create(item_id: params[:id])
+  redirect_to root_path
 end
 
 private

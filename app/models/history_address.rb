@@ -9,7 +9,6 @@ class HistoryAddress
     validates :address
     validates :user_id
     validates :item_id
-    validates :token
     validates :phone_number, format: { with: /\A\d{10,11}\z/ }
   end
 

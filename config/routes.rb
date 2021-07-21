@@ -5,5 +5,12 @@ Rails.application.routes.draw do
   root to: 'items#index'
   resources :items do
     resources :histories, only: [:index, :create]
+    resources :comments, only: :create
+  end
+
+  resources :users, only: [:show, :update]
+  resources :cards, only: [:new, :create]
+  resources :items, only: :history do
+    post 'history', on: :member
   end
 end

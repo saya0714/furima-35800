@@ -8,6 +8,7 @@ require("@rails/ujs").start()
 require("channels")
 require("../tax")
 require("../token")
+require("../card")
 
 
 

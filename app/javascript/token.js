@@ -13,6 +13,8 @@ const pay = ()=> {
       exp_year: `20${formData.get("history_address[exp_year]")}`,
     };
 
+    console.log(card)
+
 
     Payjp.createToken(card, (status, response) => {
       if (status == 200) {
@@ -31,4 +33,4 @@ const pay = ()=> {
   })
 }
 
-window.addEventListener("load", pay);
+
