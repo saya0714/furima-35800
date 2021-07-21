@@ -205,3 +205,16 @@
   font-weight: bold;
   font-size: 23px;
 }
+
+.comments {
+  padding: 5px;
+  margin-top: 15px;
+  margin-right: 300px; 
+  font-size: 20px;
+
+}
+
+.comments a {
+  color: #57C3E9;
+}
+

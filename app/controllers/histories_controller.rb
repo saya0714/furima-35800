@@ -5,10 +5,24 @@ class HistoriesController < ApplicationController
 
   def index
     @history_address = HistoryAddress.new
+    Payjp.api_key = ENV['PAYJP_SECRET_KEY']
+    card = Card.find_by(user_id: current_user.id)
+
+    if card.present?
+      customer = Payjp::Customer.retrieve(card.customer_token)
+      @card = customer.cards.first
+    
+    else
+      redirect_to new_card_path
   end
+    end
+
 
   def create
     @history_address = HistoryAddress.new(history_params)
+    Payjp.api_key = ENV['PAYJP_SECRET_KEY']
+    @card = Card.find_by(user_id: current_user.id)
+  
     if @history_address.valid?
        pay_item
        @history_address.save
@@ -21,7 +35,7 @@ end
 
 private
   def history_params
-    params.require(:history_address).permit(:postal_code, :delivery_area_id, :city_name, :address, :building_name, :phone_number).merge(token: params[:token], user_id: current_user.id, item_id: @item.id)
+    params.require(:history_address).permit(:postal_code, :delivery_area_id, :city_name, :address, :building_name, :phone_number).merge(user_id: current_user.id, item_id: params[:item_id])
   end
       
   def setting_item
@@ -29,12 +43,15 @@ private
   end
 
   def pay_item
+    if @card.present?
     Payjp.api_key = ENV["PAYJP_SECRET_KEY"]
+    customer_token = current_user.card.customer_token
     Payjp::Charge.create(
       amount: @item.price,
-      card: history_params[:token],
+      customer: customer_token,
       currency: 'jpy' 
     )
+    end
   end
 
   def sold_out_item
