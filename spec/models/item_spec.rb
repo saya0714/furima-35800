@@ -53,7 +53,7 @@ RSpec.describe Item, type: :model do
       expect(@item.errors.full_messages).to include("価格を入力してください")
     end
       it "imageが空だと登録できない" do
-        @item.image = nil
+        @item.images = nil
         @item.valid?
         expect(@item.errors.full_messages).to include("写真を入力してください")
       end

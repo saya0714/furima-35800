@@ -48,11 +48,6 @@ RSpec.describe HistoryAddress, type: :model do
         @history_address.valid?
         expect(@history_address.errors.full_messages).to include("電話番号は不正な値です")
        end
-       it "クレジットカード情報が空だと登録できない" do
-        @history_address.token = nil
-        @history_address.valid?
-        expect(@history_address.errors.full_messages).to include("クレジットカードを入力してください")
-       end
        it "user_id空だと登録できない" do
         @history_address.user_id = nil
         @history_address.valid?
